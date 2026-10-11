@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NEXORA Play: explora series y películas.">
+  <title>NEXORA Play</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/"><span class="brand-mark">N</span><span>NEXORA <b>PLAY</b></span></a>
+    <nav class="nav"><a href="#catalogo">Explorar</a><a href="#series">Series</a><a href="#peliculas">Películas</a></nav>
+  </header>
+  <main>
+    <section class="hero">
+      <p class="eyebrow">TU PRÓXIMA HISTORIA COMIENZA AQUÍ</p>
+      <h1>Historias para <span>quedarte.</span></h1>
+      <p class="hero-copy">Explora el catálogo de NEXORA Play y reproduce los títulos disponibles aquí mismo.</p>
+      <a class="primary-btn" href="#catalogo">Explorar catálogo <span>↘</span></a>
+    </section>
+    <section class="catalog" id="catalogo">
+      <div class="section-head">
+        <div><p class="eyebrow">BIBLIOTECA</p><h2>Descubre tu próxima historia</h2></div>
+        <input id="search" type="search" placeholder="Buscar título..." aria-label="Buscar título">
+      </div>
+      <div class="filters">
+        <button class="filter active" data-type="all">Todo</button>
+        <button class="filter" data-type="series" id="series">Series</button>
+        <button class="filter" data-type="movie" id="peliculas">Películas</button>
+      </div>
+      <div id="catalogGrid" class="catalog-grid"><div class="notice">Cargando catálogo…</div></div>
+    </section>
+  </main>
+  <footer>© <span id="year"></span> NEXORA Play · Catálogo personal</footer>
+
+  <div class="modal hidden" id="detailsModal" role="dialog" aria-modal="true" aria-label="Detalles del título">
+    <div class="modal-backdrop" data-close></div>
+    <section class="detail-panel">
+      <button class="icon-close" data-close aria-label="Cerrar">×</button>
+      <img id="detailImage" class="detail-image" alt="">
+      <div class="detail-body">
+        <p class="eyebrow" id="detailType"></p>
+        <h2 id="detailName"></h2>
+        <p id="detailMeta" class="muted"></p>
+        <p id="detailDescription" class="description"></p>
+        <div id="movieAction"></div>
+        <div id="seriesEpisodes" class="episodes-area"></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="player-modal hidden" id="playerModal" role="dialog" aria-modal="true" aria-label="Reproductor de vídeo">
+    <div class="player-backdrop" data-player-close></div>
+    <section class="player-shell">
+      <div class="player-head"><div><p class="eyebrow">NEXORA PLAYER</p><h2 id="playerTitle">Reproduciendo</h2></div><button class="icon-close player-close" data-player-close aria-label="Cerrar reproductor">×</button></div>
+      <div class="player-frame-wrap" id="playerFrameWrap"></div>
+      <p class="player-note">Si el reproductor no aparece, el proveedor puede bloquear la inserción o el enlace puede haber caducado.</p>
+    </section>
+  </div>
+  <script src="/script.js"></script>
+</body>
+</html>

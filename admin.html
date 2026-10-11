@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Administración · NEXORA Play</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="stylesheet" href="/admin.css">
+</head>
+<body class="admin-body">
+  <header class="topbar">
+    <a class="brand" href="/"><span class="brand-mark">N</span><span>NEXORA <b>ADMIN</b></span></a>
+    <a class="nav-link" href="/">Ver catálogo ↗</a>
+  </header>
+  <main class="admin-main">
+    <section class="admin-intro">
+      <p class="eyebrow">PANEL PRIVADO</p>
+      <h1>Gestiona tu <span>biblioteca.</span></h1>
+      <p class="muted">Añade películas, series y episodios. Las URL se guardan en MongoDB; los vídeos siguen alojados en el proveedor externo autorizado.</p>
+    </section>
+
+    <section class="admin-card" id="keyCard">
+      <h2>Acceso de administración</h2>
+      <p class="muted">Introduce la clave privada configurada como <code>NEXORA_ADMIN_KEY</code> en Vercel. No se guarda permanentemente.</p>
+      <form id="keyForm" class="form-grid">
+        <label class="full">Clave de administración<input id="adminKey" type="password" autocomplete="current-password" required placeholder="Tu clave privada"></label>
+        <div class="full form-actions"><button class="primary-btn" type="submit">Abrir panel</button><span id="keyStatus" class="status"></span></div>
+      </form>
+    </section>
+
+    <div id="adminWorkspace" class="hidden">
+      <div class="admin-toolbar"><div><p class="eyebrow">CONTENIDO</p><h2>Administración del catálogo</h2></div><button id="logoutBtn" class="secondary-btn">Bloquear panel</button></div>
+      <section class="admin-card">
+        <h2 id="titleFormHeading">Añadir título</h2>
+        <form id="titleForm" class="form-grid">
+          <label>Nombre<input id="titleName" required maxlength="160" placeholder="Nombre de la serie o película"></label>
+          <label>Tipo<select id="titleType" required><option value="series">Serie</option><option value="movie">Película</option></select></label>
+          <label class="full">URL de la portada<input id="titleImage" type="url" required placeholder="https://.../portada.jpg"></label>
+          <label class="full">Descripción<textarea id="titleDescription" rows="3" maxlength="3000" placeholder="Descripción breve"></textarea></label>
+          <label>Año<input id="titleYear" type="number" min="1888" max="2100" placeholder="2026"></label>
+          <label>Géneros separados por comas<input id="titleGenres" placeholder="Aventura, Drama"></label>
+          <label class="full" id="movieUrlField">URL del reproductor de la película<input id="titleVideo" type="url" placeholder="https://.../embed/..."></label>
+          <div class="full form-actions"><button class="primary-btn" type="submit">Guardar título</button><button id="cancelEdit" class="secondary-btn hidden" type="button">Cancelar edición</button><span id="titleStatus" class="status"></span></div>
+        </form>
+      </section>
+
+      <section class="admin-card">
+        <h2>Añadir capítulo a una serie</h2>
+        <form id="episodeForm" class="form-grid">
+          <label class="full">Serie<select id="episodeSeries" required><option value="">Cargando series…</option></select></label>
+          <label>Temporada<input id="seasonNumber" type="number" min="1" step="1" value="1" required></label>
+          <label>Número de capítulo<input id="episodeNumber" type="number" min="1" step="1" value="1" required></label>
+          <label class="full">Nombre del capítulo<input id="episodeName" required maxlength="160" placeholder="Ej. El comienzo"></label>
+          <label class="full">URL del reproductor incrustable<input id="episodeVideo" type="url" required placeholder="https://.../embed/..."></label>
+          <label class="full">URL de imagen del capítulo (opcional)<input id="episodePoster" type="url" placeholder="https://.../capitulo.jpg"></label>
+          <label class="full">Descripción del capítulo<textarea id="episodeDescription" rows="2" maxlength="2000" placeholder="Descripción opcional"></textarea></label>
+          <div class="full form-actions"><button class="primary-btn" type="submit">Guardar capítulo</button><span id="episodeStatus" class="status"></span></div>
+        </form>
+      </section>
+
+      <section class="admin-card">
+        <div class="list-head"><div><h2>Contenido publicado</h2><p class="muted">Puedes editar o eliminar títulos.</p></div><button id="refreshBtn" class="secondary-btn">Actualizar</button></div>
+        <div id="adminTitleList" class="admin-list"><p class="muted">Cargando…</p></div>
+      </section>
+      <section class="admin-card">
+        <div class="list-head"><div><h2>Capítulos guardados</h2><p class="muted">Filtra por serie para revisar o eliminar episodios.</p></div><select id="manageSeries" class="select-small"><option value="">Elige una serie</option></select></div>
+        <div id="adminEpisodeList" class="admin-list"><p class="muted">Elige una serie para ver sus capítulos.</p></div>
+      </section>
+    </div>
+    <p class="admin-foot">NEXORA Play · Mantén privada tu clave de administración.</p>
+  </main>
+  <script src="/admin.js"></script>
+</body>
+</html>
